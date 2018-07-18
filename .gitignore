@@ -1,0 +1,11 @@
+/myvenv
+*.db
+*.pyc
+/app/*.pyc
+/app/SQLiteStudio
+/app/*.zip
+/app/*.db
+/app/*.xz
+/app/USERINFO
+/app/*.zip
+/app/bootstrap-3.3.7-dist
