@@ -4,7 +4,7 @@ from app.forms import LoginForm,PhotoForm,SignupForm
 import os,sys
 import subprocess
 from dbcode import *
-
+import time
 
 
 jumbo=False
@@ -32,13 +32,17 @@ def MainLogic():
 		fileList = request.files.getlist('file')
 		# if user does not select file, browser also
 		# submit an empty part without filename
+		uid=session['uid']
 		for item in fileList:
 			filename = secure_filename(item.filename)
 			mainlist.append(filename)
 			item.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-			#return redirect(url_for('/image',filename=filename))
+			insertImages(uid , filename , app.config['UPLOAD_FOLDER']+"/"+filename)
+
+			#time.sleep(3)
+			print('inserting image ', filename)
 	
-		EXECUTE_ALGO(mainlist)
+		#EXECUTE_ALGO(mainlist)
 	logged_in=True
 	return render_template('image.html',title='Main',jumbo=False,logged_in=True)
 

@@ -1,11 +1,8 @@
-
-# coding: utf-8
-
-# In[1]:
-
+        from flask import render_template,flash,redirect,url_for,request,session,abort
 import sqlite3 as sql 
 import os
-conn=sql.connect('/home/chetan/Desktop/Image-Organizer/ImageData3.db',check_same_thread=False)
+from connection import conn
+#conn=sql.connect('/home/chetan/Desktop/Image-Organizer/ImageData3.db',check_same_thread=False)
 # In[2]:
 
 
@@ -13,7 +10,9 @@ conn=sql.connect('/home/chetan/Desktop/Image-Organizer/ImageData3.db',check_same
 
 def Execute(q ,cursor = False):
     cur = conn.cursor()
+    print('before execute')
     cur.execute(q)
+    print('after execute')
     res =cur.fetchall()
     conn.commit()
     if cursor:
@@ -70,12 +69,13 @@ def SignIn(uname, pwd):
     -> if uname and pwd match with entry in database it returns True else if error occurs it returns False
     """
     query = 'select pwd from users where uname = "%s"'%(uname)
-    print(uname)
-    print(pwd)
     try:
         res = Execute(query)
-        print(res,pwd)
         if str(res[0][0]) == pwd:
+            q='select uid from users where uname= "%s"'%(uname)
+            r=Execute(q)
+            session['uid']=r[0][0]
+            print(session['uid'])
             return True
         else:
             return False
@@ -101,10 +101,17 @@ def SignUp(uname , pwd , email , phoneno = ''):
 def insertImages(uid , imgname , imglink ):
     query = 'insert into images(uid,imgname,imglink,upvotes,objects) values("%s","%s","%s",0,0)'%(uid , imgname , imglink )
     try:
+        #Execute(query)
+        cur = conn.cursor()
+        print("Inserting images")
+        #cur.execute(query)
         Execute(query)
-    except:
-        return False
-    return True
+    except Exception as e:
+        print(e)
+        #return False
+    #return True
+
+
 def upvote(imgid):
     """
     Used to upvote an image
@@ -112,6 +119,7 @@ def upvote(imgid):
     """
     query = 'update  images set upvotes = (upvotes + 1) where imgid = %d'%(imgid)
     Execute(query)
+
 def insertAttribute(imgid , objname):
     query = 'insert into attributes values ("%s","%s")'%(imgid,objname)
     try:
@@ -123,6 +131,7 @@ def insertFavourites(imgid,uid):
     query = 'insert into favourites(imgid,uid) values (%d,%d)'%(imgid,uid)
     print(query)
     Execute(query)
+    
 def addObjects(imgid, objset):
     query = 'update images set objects = %d where imgid = "%s"'%(len(objset),imgid)
     
