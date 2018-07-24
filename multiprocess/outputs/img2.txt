@@ -1,0 +1,5 @@
+/home/koushal/Documents/multiprocess/images/cat.jpeg: Predicted in 20.768137 seconds.
+cat: 95%
+cat: 91%
+cat: 89%
+cat: 54%

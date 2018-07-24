@@ -1,0 +1,3 @@
+/home/koushal/Documents/multiprocess/images/DogPerson.jpeg: Predicted in 20.726505 seconds.
+dog: 100%
+person: 100%
