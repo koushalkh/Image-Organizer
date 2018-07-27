@@ -1,6 +1,6 @@
 from flask import render_template,flash,redirect,url_for,request,session,abort
 from app import app
-from app.forms import LoginForm,PhotoForm,SignupForm
+from app.forms import *
 import os,sys
 import subprocess
 from dbcode import *
@@ -21,7 +21,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/image',methods=['GET','POST'])
+@app.route('/upload',methods=['GET','POST'])
 def MainLogic():
 	mainlist=[]
 	if request.method == 'POST':
@@ -47,6 +47,21 @@ def MainLogic():
 	return render_template('image.html',title='Main',jumbo=False,logged_in=True)
 
 
+@app.route('/images',methods=['GET','POST'])
+def ImagePage():
+	form=SearchForm()
+	if(form.validate_on_submit()):
+			keyword=request.form['keyword']
+			print("keyword is ",keyword)
+
+			PublicSearch(keyword)
+
+			flash('Search requested for user {}'.format(form.keyword.data))
+			return redirect('/images')
+	return render_template('gallery.html',title='Images',form=form)
+
+
+
 
 @app.route('/login',methods=['GET','POST'])
 def LoginPage():
@@ -60,7 +75,7 @@ def LoginPage():
 			session['username']=username
 			session['password']=password
 			flash('Login requested for user {},remember_me {}'.format(form.username.data,form.remember_me.data))
-			return redirect('/image')
+			return redirect('/images')
 		else:
 			error='Invalid Credentials. Please try again.'
 	return render_template('login.html',title='Login',login=False,form=form,error=error)
@@ -93,7 +108,7 @@ def signup():
 			session['username']=username
 			session['password']=password
 			flash('Login requested for user {}'.format(form.username.data))
-			return redirect('/image')
+			return redirect('/images')
 		#else:
 			#error='Invalid Credentials. Please try again.'
 	return render_template('signup.html',title='SignUp',login=False,form=form,error=error)

@@ -27,3 +27,8 @@ class SignupForm(FlaskForm):
 class UploadForm(FlaskForm):
 	photo = FileField(validators=[FileRequired()])
 	submit=SubmitField('Upload')
+
+
+class SearchForm(FlaskForm):
+	keyword=StringField('keyword',validators=[DataRequired()])
+	submit=SubmitField('submit')

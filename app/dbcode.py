@@ -1,4 +1,4 @@
-        from flask import render_template,flash,redirect,url_for,request,session,abort
+from flask import render_template,flash,redirect,url_for,request,session,abort
 import sqlite3 as sql 
 import os
 from connection import conn
@@ -134,7 +134,6 @@ def insertFavourites(imgid,uid):
     
 def addObjects(imgid, objset):
     query = 'update images set objects = %d where imgid = "%s"'%(len(objset),imgid)
-    
     try:
         Execute(query)
         for obj in objset:
@@ -142,3 +141,13 @@ def addObjects(imgid, objset):
         return True
     except:
         return False
+
+
+def PublicSearch(attr):
+    query = 'select imglink from images I , attributes A where I.imgid = A.imgid and objname = "%s" '%(attr)
+    try:
+        res = Execute(query)
+        print(res)
+    except:
+        return None
+    return [r[0] for r in res]
