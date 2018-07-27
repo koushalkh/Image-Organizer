@@ -1,0 +1,2 @@
+/home/chetan/Desktop/cat3.jpeg: Predicted in 41.423539 seconds.
+cat: 98%

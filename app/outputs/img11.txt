@@ -1,0 +1,6 @@
+/home/chetan/Desktop/party.jpeg: Predicted in 28.983679 seconds.
+person: 99%
+person: 98%
+person: 98%
+person: 77%
+person: 57%

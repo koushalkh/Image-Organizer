@@ -1,0 +1,4 @@
+/home/chetan/Desktop/giraffe.jpg: Predicted in 30.218796 seconds.
+giraffe: 100%
+giraffe: 62%
+zebra: 96%

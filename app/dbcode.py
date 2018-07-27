@@ -147,7 +147,7 @@ def PublicSearch(attr):
     query = 'select imglink from images I , attributes A where I.imgid = A.imgid and objname = "%s" '%(attr)
     try:
         res = Execute(query)
-        print(res)
+        print([str(r[0]) for r in res])
     except:
         return None
-    return [r[0] for r in res]
+    return [str(r[0]) for r in res]

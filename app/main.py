@@ -1,8 +1,9 @@
 import  sqlite3 as sql
 import time
 import os
-from  connect import conn
+from  connection import conn
 from pathlib import Path
+import multiprocessing
 def Execute(q ,cursor = False):
     cur = conn.cursor()
     cur.execute(q)
@@ -56,7 +57,8 @@ def addObjects(imgid, objset):
         for obj in objset:
             insertAttribute(imgid,obj)
         return True
-    except:
+    except Exception as e:
+        print(e)
         return False
 
 #print(insertImages(1,'DogPerson.jpeg','/home/koushal/Documents/multiprocess/images/DogPerson.jpeg'))
@@ -78,9 +80,9 @@ def getList(outputloc):
 
 
 def EXECUTE_ALGO(image_names , imgid):
-    outputloc = '/home/koushal/Documents/multiprocess/outputs/img%s.txt'%(imgid)
+    outputloc = '/home/chetan/Desktop/Image-Organizer/app/outputs/img%s.txt'%(imgid)
     print(image_names)
-    os.system('/home/koushal/Documents/multiprocess/test.sh  %s  %s'%(image_names, outputloc))
+    os.system('/home/chetan/Desktop/Image-Organizer/app/test.sh  %s  %s'%(image_names, outputloc))
     objList = getList(outputloc)
     addObjects(imgid,objList)
     #print(open(outputloc,'r').read())
@@ -98,7 +100,24 @@ while True:
         print("continued!! after sleep")
         continue
     else:
-        for i in range(len(res)):
-            EXECUTE_ALGO(res[i][0] , res[i][1]) 
+        t=[]
+        length= len(res)
+        if(multiprocessing.cpu_count()<length):
+            length = multiprocessing.cpu_count()
+        for i in range(length):
+            t.append(res[i])
+        print(t)
+        pool=multiprocessing.Pool(processes=length)
+        result=[pool.apply_async(EXECUTE_ALGO,a) for a in t]
+        for item in result:
+            item.get()
+        #pool.map(EXECUTE_ALGO,t)
 
-print(Execute("select * from attributes"))
+
+print(Execute("select * from attributes"))  
+
+
+
+
+
+

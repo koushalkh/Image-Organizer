@@ -1,0 +1,3 @@
+/home/chetan/Desktop/cat5.jpeg: Predicted in 28.104196 seconds.
+vase: 56%
+cat: 81%

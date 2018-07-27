@@ -50,15 +50,14 @@ def MainLogic():
 @app.route('/images',methods=['GET','POST'])
 def ImagePage():
 	form=SearchForm()
+	images_list = list()
 	if(form.validate_on_submit()):
 			keyword=request.form['keyword']
 			print("keyword is ",keyword)
-
-			PublicSearch(keyword)
-
+			images_list=PublicSearch(keyword)	
 			flash('Search requested for user {}'.format(form.keyword.data))
 			return redirect('/images')
-	return render_template('gallery.html',title='Images',form=form)
+	return render_template('gallery.html',title='Images',form=form,imgList=images_list)
 
 
 
@@ -75,7 +74,7 @@ def LoginPage():
 			session['username']=username
 			session['password']=password
 			flash('Login requested for user {},remember_me {}'.format(form.username.data,form.remember_me.data))
-			return redirect('/images')
+			return redirect('/upload')
 		else:
 			error='Invalid Credentials. Please try again.'
 	return render_template('login.html',title='Login',login=False,form=form,error=error)

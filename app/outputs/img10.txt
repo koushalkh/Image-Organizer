@@ -1,0 +1,3 @@
+/home/chetan/Desktop/person.jpg: Predicted in 29.087888 seconds.
+horse: 100%
+dog: 97%

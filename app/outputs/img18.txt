@@ -1,0 +1,5 @@
+/home/chetan/Desktop/cat6.jpeg: Predicted in 28.098123 seconds.
+bowl: 96%
+cat: 99%
+cat: 97%
+cat: 97%
