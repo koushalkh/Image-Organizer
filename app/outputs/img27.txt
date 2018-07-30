@@ -1,0 +1,5 @@
+/home/chetan/Desktop/Image-Organizer/app/static/cat6.jpeg: Predicted in 42.306969 seconds.
+bowl: 96%
+cat: 99%
+cat: 97%
+cat: 97%

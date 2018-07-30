@@ -1,0 +1,3 @@
+/home/chetan/Desktop/Image-Organizer/app/static/eagle.jpg: Predicted in 26.333831 seconds.
+vase: 96%
+bird: 100%

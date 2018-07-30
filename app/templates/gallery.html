@@ -11,6 +11,7 @@
     <script src="js/file-upload.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <style>
   body {
@@ -190,7 +191,6 @@
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
     -->
-
     <form action='' method="post" novalidate>
       {{ form.hidden_tag() }}
       <p>
@@ -201,14 +201,20 @@
         {{form.submit()}}
       </p>
     </form>
+    <p>{{error}}</p>
+    <!--<ul>
+    {% for image in images_list %}
+      <li>{{image|e}}</li>
+    {% endfor %}
+    </ul>-->
+    {%set count1=0%}
     <h2 style="text-align:center">Lightbox</h2>
     <div class="row">
       <div class="column">
-        {%set count1=0%}
-        {% for image in imgList %}
+        {% for image in images_list %}
           {%set count1=count1+1%}
           <div class="column">
-            <img src={{image}} style="width:100%" onclick="openModal();currentSlide({{ count1 }})" class="hover-shadow cursor">
+            <img src="{{ url_for('static', filename=image) }}" style="width:100%" onclick="openModal();currentSlide({{ count1 }})" class="hover-shadow cursor">
           </div>
         {% endfor %}
       </div>
@@ -217,24 +223,23 @@
     <div id="myModal" class="modal">
       <span class="close cursor" onclick="closeModal()">&times;</span>
       <div class="modal-content">
-        {% for image in imgList %}
+        {% for image in images_list %}
           {%set count2=count2+1%}
           <div class="mySlides">
-            <div class="numbertext">{{count2 / count1}}</div>
-            <img src={{ image}} style="width:70%">
+            <div class="numbertext">{{count2}} / {{images_list|length}}</div>
+            <img src="{{image}}" style="width:70%">
           </div>
         {% endfor %}
-        
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
         <div class="caption-container">
           <p id="caption"></p>
         </div>
         {%set count3=0%}
-        {% for image in imgList %}
+        {% for image in images_list%}
           {%set count3=count3+1%}
           <div class="column">
-            <img class="demo cursor" src={{ image }} style="width:80%" onclick="currentSlide({{ count3 }})" alt="Nature and sunrise">
+            <img class="demo cursor" src="{{image }}" style="width:80%" onclick="currentSlide({{ count3 }})" alt="Nature and sunrise">
           </div>
         {% endfor %}
       </div>
@@ -257,6 +262,7 @@
     function showSlides(n) {
     var i;
     var slides = document.getElementsByClassName("mySlides");
+    console.log(slides);
     var dots = document.getElementsByClassName("demo");
     var captionText = document.getElementById("caption");
     if (n > slides.length) {slideIndex = 1}
@@ -272,6 +278,5 @@
     captionText.innerHTML = dots[slideIndex-1].alt;
     }
     </script>
-    
   </body>
 </html>

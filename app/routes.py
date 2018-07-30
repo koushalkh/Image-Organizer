@@ -6,7 +6,6 @@ import subprocess
 from dbcode import *
 import time
 
-
 jumbo=False
 login=True
 from app import ALLOWED_EXTENSIONS,secure_filename
@@ -46,18 +45,34 @@ def MainLogic():
 	logged_in=True
 	return render_template('image.html',title='Main',jumbo=False,logged_in=True)
 
+def getList():
+	fhand = open('/home/chetan/Desktop/Image-Organizer/app/imagelist.txt', 'r')
+	l = list()
+	for line in fhand:
+		#l.append(line[:len(line) - 1])
+		line = line[:len(line) - 1]
+		line = line.split('/')
+		l.append(line[len(line) - 1])
+	print(l)
+	return l
 
 @app.route('/images',methods=['GET','POST'])
 def ImagePage():
 	form=SearchForm()
-	images_list = list()
 	if(form.validate_on_submit()):
 			keyword=request.form['keyword']
 			print("keyword is ",keyword)
-			images_list=PublicSearch(keyword)	
+			images_list = []
+			images_list=PublicSearch(keyword)
+			fhand = open('/home/chetan/Desktop/Image-Organizer/app/imagelist.txt', 'w')
+			for item in images_list:
+				fhand.write(item)
+				fhand.write("\n")
+			fhand.close()	
 			flash('Search requested for user {}'.format(form.keyword.data))
 			return redirect('/images')
-	return render_template('gallery.html',title='Images',form=form,imgList=images_list)
+	error=1
+	return render_template('gallery.html',title='Images',form=form,images_list=getList(),error=error)
 
 
 

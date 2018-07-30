@@ -1,0 +1,2 @@
+/home/chetan/Desktop/Image-Organizer/app/static/cat3.jpeg: Predicted in 41.478071 seconds.
+cat: 98%
