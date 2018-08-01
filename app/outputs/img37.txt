@@ -1,0 +1,2 @@
+/home/chetan/Desktop/Image-Organizer/app/static/dog3.jpeg: Predicted in 28.897746 seconds.
+dog: 100%

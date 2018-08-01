@@ -1,0 +1,3 @@
+/home/chetan/Desktop/Image-Organizer/app/static/dog1.jpeg: Predicted in 26.773819 seconds.
+vase: 100%
+dog: 98%
