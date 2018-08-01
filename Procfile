@@ -1,1 +1,1 @@
-web: gunicorn snapyy:app
+web: gunicorn --chdir app app:app
