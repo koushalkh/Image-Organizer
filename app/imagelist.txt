@@ -1,0 +1,3 @@
+/home/chetan/Desktop/Image-Organizer/app/static/dog1.jpeg
+/home/chetan/Desktop/Image-Organizer/app/static/dog3.jpeg
+/home/chetan/Desktop/Image-Organizer/app/static/dog2.jpeg
