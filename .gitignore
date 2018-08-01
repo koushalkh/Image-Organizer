@@ -9,3 +9,8 @@
 /app/USERINFO
 /app/*.zip
 /app/bootstrap-3.3.7-dist
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
