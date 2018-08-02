@@ -10,6 +10,7 @@ class LoginForm(FlaskForm):
 	password=PasswordField('Password',validators=[DataRequired()])
 	remember_me=BooleanField('Remember Me')
 	submit=SubmitField('Sign In')
+	abc = StringField('abc', render_kw={"placeholder": "test"})
 
 class PhotoForm(FlaskForm):
     photo = FileField(validators=[FileRequired()])
@@ -22,6 +23,7 @@ class SignupForm(FlaskForm):
 	age=StringField('age',validators=[DataRequired()])
 	mobile=StringField('mobile',validators=[DataRequired()])
 	submit=SubmitField('Sign Up')
+	abc = StringField('abc', render_kw={"placeholder": "test"})
 
 
 class UploadForm(FlaskForm):
