@@ -62,6 +62,7 @@ def addObjects(imgid, objset):
         return False
 
 #print(insertImages(1,'DogPerson.jpeg','/home/koushal/Documents/multiprocess/images/DogPerson.jpeg'))
+
 print(Execute("select * from images"))
 
 def getList(outputloc):
@@ -80,8 +81,10 @@ def getList(outputloc):
 
 
 def EXECUTE_ALGO(image_names , imgid):
+    #outputloc = os.path.abspath('app/outputs/img%s.txt'%(imgid))
     outputloc = '/home/chetan/Desktop/Image-Organizer/app/outputs/img%s.txt'%(imgid)
     print(image_names)
+    #os.system(os.path.abspath('app/test.sh  %s  %s'%(image_names, outputloc)))
     os.system('/home/chetan/Desktop/Image-Organizer/app/test.sh  %s  %s'%(image_names, outputloc))
     objList = getList(outputloc)
     addObjects(imgid,objList)

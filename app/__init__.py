@@ -4,7 +4,8 @@ from werkzeug.utils import secure_filename
 import os
 
 
-UPLOAD_FOLDER = '/home/chetan/Desktop/Image-Organizer/app/static'
+#UPLOAD_FOLDER = '/home/chetan/Desktop/Image-Organizer/app/static'
+UPLOAD_FOLDER = os.path.abspath('app/static')
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app=Flask(__name__)

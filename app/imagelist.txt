@@ -1,6 +1,1 @@
-/home/chetan/Desktop/Image-Organizer/app/static/cat4.jpeg
-/home/chetan/Desktop/Image-Organizer/app/static/cat5.jpeg
-/home/chetan/Desktop/Image-Organizer/app/static/cat3.jpeg
-/home/chetan/Desktop/Image-Organizer/app/static/cat6.jpeg
-/home/chetan/Desktop/Image-Organizer/app/static/cat2.jpeg
-/home/chetan/Desktop/Image-Organizer/app/static/cat1.jpeg
+/home/chetan/Desktop/Image-Organizer/app/static/eagle.jpg

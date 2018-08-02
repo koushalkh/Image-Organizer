@@ -1,0 +1,1 @@
+/home/chetan/Desktop/Image-Organizer/app/static/scream.jpg: Predicted in 28.625227 seconds.

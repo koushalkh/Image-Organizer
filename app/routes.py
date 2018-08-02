@@ -46,7 +46,7 @@ def MainLogic():
 	return render_template('image.html',title='Main',jumbo=False,logged_in=True)
 
 def getList():
-	fhand = open('/home/chetan/Desktop/Image-Organizer/app/imagelist.txt', 'r')
+	fhand = open(os.path.abspath('app/imagelist.txt'), 'r')
 	l = list()
 	for line in fhand:
 		#l.append(line[:len(line) - 1])
@@ -64,7 +64,7 @@ def ImagePage():
 			print("keyword is ",keyword)
 			images_list = []
 			images_list=PublicSearch(keyword)
-			fhand = open('/home/chetan/Desktop/Image-Organizer/app/imagelist.txt', 'w')
+			fhand = open(os.path.abspath('app/imagelist.txt'), 'w')
 			for item in images_list:
 				fhand.write(item)
 				fhand.write("\n")
@@ -127,14 +127,3 @@ def signup():
 			#error='Invalid Credentials. Please try again.'
 	return render_template('signup.html',title='SignUp',login=False,form=form,error=error)
 
-
-def Personal():
-	pass
-
-def EXECUTE_ALGO(image_names):
-	print(image_names)
-	for item in image_names:
-		os.system('/home/chetan/Desktop/darknet/test.sh ' + item)
-		#subprocess.call([os.path.abspath('/home/chetan/Desktop/darknet/test.sh'), image_name])
-	print("dasbdsab")
-	#os.system("sh /home/chetan/Desktop/darknet/test.sh image_name")
