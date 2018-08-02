@@ -3,7 +3,7 @@ from app import app
 from app.forms import *
 import os,sys
 import subprocess
-from dbcode import *
+from app.dbcode import *
 import time
 
 jumbo=False

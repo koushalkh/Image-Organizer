@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/style2.css">
+    <link rel="stylesheet" href="./css/imgindex.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>image Classifier</title>
+  </head>
+  <body>
+    <header >
+      <div class="container">
+        <div id="branding" style="padding-right:30px;">
+          <h1 class="align-self:center;"><span class="highlight1">Image</span> Classifier </h1>
+        </div>
+        <nav>
+          <ul>
+            <li class="current"><a href="#">login</a></li>
+            <li class="current"><a href="#" style="padding-left:10px; padding-right:10px;">signup</a></li>
+            <li class="current"><a href="#">images</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section class="container search1">
+      <!-- The form -->
+      <form class="example" action="action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </section>
+    <section >
+      <div class="container1">
+        <div><img src="./images/download.jpg"/ class="img"  onclick="openModal();currentSlide(1)" class="hover-shadow"></div>
+        <div class="vertical"><img src="./images/download 1.jpg"/ class="img1"  onclick="openModal();currentSlide(2)" class="hover-shadow"></div>
+        <div class="horizontal"><img src="./images/do2.jpg"/ class="img1"  onclick="openModal();currentSlide(3)" class="hover-shadow"></div>
+        <div><img src="./images/download 3.jpg"/ class="img1"  onclick="openModal();currentSlide(4)" class="hover-shadow" ></div>
+        <div><img src="./images/download 4.jpg"/ class="img1"  onclick="openModal();currentSlide(5)" class="hover-shadow" ></div>
+        <div class="big"><img src="./images/download 5.jpg"/ class="img"  onclick="openModal();currentSlide(2)" class="hover-shadow></div>
+        <div><img src="./images/do.jpg"/ class="img1"  onclick="openModal();currentSlide(2)" class="hover-shadow"></div>
+        <div class="vertical"><img src="./images/download 7.jpg"/ class="img1"  onclick="openModal();currentSlide(2)" class="hover-shadow"></div>
+        <div><img src="./images/download.jpg"/ class="img1"  onclick="openModal();currentSlide(2)" class="hover-shadow"></div>
+        <div class="horizontal"><img src="./images/download 2.jpg"/ class="img1"  onclick="openModal();currentSlide(2)" class="hover-shadow"></div>
+        <div><img src="./images/img1.jpg"/ class="img1"  onclick="openModal();currentSlide(2)" class="hover-shadow"></div>
+        <div><img src="./images/do.jpg"/ class="img1"  onclick="openModal();currentSlide(2)" class="hover-shadow"></div>
+      </div>
+    </section>
+  
+    <div id="myModal" class="modal">
+      <span class="close cursor"  onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+        <div class="mySlides container2" >
+          <div class="numbertext">1 / 4</div>
+          <img src="images/download.jpg" class="img" style="width:100%">
+          <button class="btn">Upvote&nbsp&#8679</button>
+          <button class="btn1">&#9825</button>
+        </div>
+        <div class="mySlides">
+          <div class="numbertext">2 / 4</div>
+          <img src="images/do.jpg" c lass="img" style="width:100%">
+        </div>
+        <div class="mySlides container2">
+          <div class="numbertext">3 / 4</div>
+          <img src="images/do2.jpg" class="img" style="width:100%">
+          <button class="btn">Upvote&nbsp&#8679</button>
+          <button class="btn1">&#9825</button>
+        </div>
+        <div class="mySlides container2">
+          <div class="numbertext">4 / 4</div>
+          <img src="images/img1.jpg" class="img" style="width:100%">
+          <button class="btn">Upvote&nbsp&#8679</button>
+          <button class="btn1">&#9825</button>
+        </div>
+        <!-- Next/previous controls -->
+        <div>
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <!-- Caption text -->
+        <div class="caption-container">
+          <p id="caption"></p>
+        </div>
+        
+  </section>
+  <script type="text/javascript">
+  // Open the Modal
+  function openModal() {
+  document.getElementById('myModal').style.display = "block";
+  }
+  // Close the Modal
+  function closeModal() {
+  document.getElementById('myModal').style.display = "none";
+  }
+  var slideIndex = 1;
+  //showSlides(slideIndex);
+  // Next/previous controls
+  function plusSlides(n) {
+  showSlides(slideIndex += n);
+  }
+  // Thumbnail image controls
+  function currentSlide(n) {
+  showSlides(slideIndex = n);
+  }
+  function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+  slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+  dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+  }
+  </script>
+<!--    <footer class="foot">Image Classifier Copyright&copy; 2018</footer>
+-->
+</body>
+</html>

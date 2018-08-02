@@ -1,7 +1,7 @@
 import  sqlite3 as sql
 import time
 import os
-from  connection import conn
+from  app.connection import conn
 from pathlib import Path
 import multiprocessing
 def Execute(q ,cursor = False):

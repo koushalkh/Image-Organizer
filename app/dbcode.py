@@ -1,7 +1,7 @@
 from flask import render_template,flash,redirect,url_for,request,session,abort
 import sqlite3 as sql 
 import os
-from connection import conn
+from app.connection import conn
 #conn=sql.connect('/home/chetan/Desktop/Image-Organizer/ImageData3.db',check_same_thread=False)
 # In[2]:
 
