@@ -1,13 +1,525 @@
-{% extends "base.html"%}
-{%block content%}
-{% if jumbo %}
-<div class="container">
-	<div class="jumbotron">
-		<h1>Neural Net Style Transfer</h1>
-		<p>Style transfer is the technique of recomposing images in the style of other images.</p>
-	</div>
-	<p>This is some text.</p>
-	<p>This is another text.</p>
-</div>
-{% endif %}
-{%endblock%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <title>Image Classifier</title>
+    <style >
+    body
+    {
+    font: 15/1.5 arial,helvetica,sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    }
+    .container
+    {
+    overflow: hidden;
+    width: 80%;
+    margin: auto;
+    }
+    header
+    {
+    min-height: 70px;
+    padding-top: 40px;
+    color: #fff;
+    border-bottom: #e8491d 3px solid;
+    background: #35424a;
+    }
+    header #branding
+    {
+    float: left;
+    }
+    header a{
+    font: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    }
+    ul
+    {
+    margin: 0;
+    padding: 0;
+    }
+    .current{
+    padding-top: 20;
+    display: inline;
+    float: right;
+    padding: 0 40 0 40;
+    }
+    header #branding h1
+    {
+    margin: 0;
+    }
+    nav{
+    display:inline;
+    float: right;
+    padding-top: 10px;
+    padding-left: 10px;
+    }
+    header a:hover{
+    font-weight: bold;
+    color: #ccc;
+    }
+    body
+    {
+    font: 15/1.5 arial,helvetica,sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    }
+    .container
+    {
+    overflow: hidden;
+    width: 80%;
+    margin: auto;
+    }
+    header
+    {
+    min-height: 70px;
+    padding-top: 40px;
+    color: #fff;
+    border-bottom: #e8491d 3px solid;
+    background: #35424a;
+    }
+    header #branding
+    {
+    float: left;
+    }
+    header a{
+    font: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    }
+    ul
+    {
+    margin: 0;
+    padding: 0;
+    }
+    .current{
+    padding-top: 20;
+    display: inline;
+    float: right;
+    padding: 0 40 0 40;
+    }
+    header #branding h1
+    {
+    margin: 0;
+    }
+    nav{
+    display:inline;
+    float: right;
+    padding-top: 10px;
+    padding-left: 10px;
+    }
+    header a:hover{
+    font-weight: bold;
+    color: #ccc;
+    }
+    #firstup{
+    min-height: 400px;
+    text-align:center;
+    color: #fff;
+    background: url('{{ url_for('static', filename='showcase.jpg') }}') no-repeat 0 -400px;
+    }
+    #firstup h1
+    {
+    margin-top:100px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    }
+    #firstup p
+    {
+    font-size:20px;
+    }
+    .button_1
+    {
+    height: 38px;
+    margin: 20px;
+    padding-right: 40px;
+    padding-left: 40px;
+    color: #fff;
+    border: 0;
+    background: #1a22da;
+    }
+    .sign{
+    text-align: center;
+    background-color:#fff;
+    display: inline;
+    box-sizing: border-box;
+    }
+    .signh{
+    box-sizing: border-box;
+    }
+    .sign label{
+    text-align:left;
+    padding: 0 0 0 0;
+    }
+    .signh p{
+    color: rgb(185, 219, 49);
+    }
+    .sign input{
+    }
+    #login-box {
+    position: relative;
+    margin: 5% auto;
+    width: 400px;
+    height: 500px;
+    background: #FFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    #Student-login-box {
+    position: relative;
+    margin: 10% auto;
+    width: 350px;
+    height: 350px;
+    background: #FFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    #Admin-login-box {
+    position: relative;
+    margin: 5% auto;
+    width: 350px;
+    height: 350px;
+    background: #FFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 300px;
+    height: 400px;
+    }
+    h1 {
+    margin: 0 0 20px 0;
+    font-weight: 300;
+    font-size: 28px;
+    }
+    input[type="text"],
+    input[type="password"] {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 220px;
+    height: 32px;
+    border: none;
+    border-bottom: 1px solid #AAA;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+    border-bottom: 2px solid #16a085;
+    color: #16a085;
+    transition: 0.2s ease;
+    }
+    input[type="submit"] {
+    margin-top: 28px;
+    width: 120px;
+    height: 32px;
+    background: #16a085;
+    border: none;
+    border-radius: 2px;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.1s ease;
+    cursor: pointer;
+    }
+    input[type="submit"]:hover,
+    input[type="submit"]:focus {
+    opacity: 0.8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+    }
+    input[type="submit"]:active {
+    opacity: 1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+    }
+    .or {
+    position: absolute;
+    top: 180px;
+    left: 280px;
+    width: 40px;
+    height: 40px;
+    background: #DDD;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    line-height: 40px;
+    text-align: center;
+    }
+    .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 300px;
+    height: 400px;
+    background: url('https://goo.gl/YbktSj');
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 2px 2px 0;
+    }
+    .right .loginwith {
+    display: block;
+    margin-bottom: 40px;
+    font-size: 28px;
+    color: #FFF;
+    text-align: center;
+    }
+    button.social-signin {
+    margin-bottom: 20px;
+    width: 220px;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    transition: 0.2s ease;
+    cursor: pointer;
+    }
+    button.social-signin:hover,
+    button.social-signin:focus {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.2s ease;
+    }
+    button.social-signin:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.2s ease;
+    }
+    button.social-signin.facebook {
+    background: #32508E;
+    }
+    button.social-signin.twitter {
+    background: #55ACEE;
+    }
+    button.social-signin.google {
+    background: #DD4B39;
+    }
+    .highlight1
+    {
+    color: #e8491d;
+    }
+    footer{
+    padding: 20px;
+    height: 40px;
+    font-size: 22px;
+    text-align: center;
+    color: #fff;
+    background-color: #e8491d;
+    }
+    .row {
+    display: -ms-flexbox; /* IE 10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE 10 */
+    flex-wrap: wrap;
+    padding: 0 4px;
+    }
+    /* Create two equal columns that sits next to each other */
+    .column {
+    -ms-flex: 50%; /* IE 10 */
+    flex: 50%;
+    padding: 0 4px;
+    }
+    .column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    }
+    /* Style the buttons */
+    .btn {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    font-size: 18px;
+    }
+    .btn:hover {
+    background-color: #ddd;
+    }
+    .btn.active {
+    background-color: #666;
+    color: white;
+    }
+    </style>
+    <!--<style>
+    .carousel {
+    width:100%;
+    height: 600px;
+    }
+    </style>-->
+  </head>
+  <body>
+    <header class="madan">
+      <div class="container">
+        <div id="branding">
+          <h1 id="madan" style="padding:0;margin:0;position:absolute;top:5%;left:10%;"><span class="highlight1">Image</span> Classifier </h1>
+        </div>
+        <nav style="background-color:#35424a;">
+          <ul>
+            <li class="current"><a href="#">login</a></li>
+            <li class="current"><a href="#"  style="padding-left:10px; padding-right:10px;">signup</a></li>
+            <li class="current"><a href="#">images</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section id="firstup">
+      <div class="container">
+        <h1>Image Classifier</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div id="article">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+    </section>
+    <section class="section1 container">
+      <div class="carousel carousel-slider" data-indicators="true">
+        <a href="#one" class="carousel-item">
+          <img src="https://wallpaper-house.com/data/out/8/wallpaper2you_244911.jpg" alt="image">
+        </a>
+        <a href="#two" class="carousel-item">
+          <img src="https://images7.alphacoders.com/467/467811.jpg" alt="image">
+        </a>
+        <a href="#three" class="carousel-item">
+          <img src="http://www.tematy.info/library/h/home-background-wallpaper/home-background-wallpaper-13.jpg" alt="">
+        </a>
+        <a href="#four" class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1521063105543-f2c8890df262?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=35786ef9db8d76bcb7e229b14755dd65&auto=format&fit=crop&w=750&q=80"
+          alt="">
+        </a>
+        <a href="#five" class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-0.3.5&s=bd8ed8308a093982ab2764855a014565&auto=format&fit=crop&w=1500&q=80"
+          alt="">
+        </a>
+      </div>
+    </section>
+    <!--  <section class="container" style="background-color:f4f4f4;"> -->
+    <!--<div class="header" id="myHeader">
+      <h1>Image Grid</h1>
+      <p>Click on the buttons to change the grid view.</p>
+      <button class="btn active" onclick="one()">1</button>
+      <button class="btn " onclick="two()">2</button>
+      <button class="btn" onclick="four()">3</button>
+    </div>-->
+    <!-- Photo Grid -->
+    <!--<div class="row">
+      <div class="column">
+        <img src="images/download.jpg" style="width:100%">
+        <img src="images/download 1.jpg" style="width:100%">
+        <img src="images/download 2.jpg" style="width:100%">
+        <img src="images/download 3.jpg" style="width:100%">
+        <img src="images/download 4.jpg" style="width:100%">
+        <img src="images/download 5.jpg" style="width:100%">
+        <img src="images/download 7.jpg" style="width:100%">
+      </div>
+      <div class="column">
+        <img src="images/download 1.jpg" style="width:100%">
+        <img src="images/download 4.jpg" style="width:100%">
+        <img src="images/download 7.jpg" style="width:100%">
+        <img src="images/download 2.jpg" style="width:100%">
+        <img src="images/download.jpg" style="width:100%">
+        <img src="images/download 5.jpg" style="width:100%">
+      </div>
+      <div class="column">
+        <img src="images/download 3.jpg" style="width:100%">
+        <img src="images/download 7.jpg" style="width:100%">
+        <img src="images/download 5.jpg" style="width:100%">
+        <img src="images/download 1.jpg" style="width:100%">
+        <img src="images/download 4.jpg" style="width:100%">
+        <img src="images/download 2.jpg" style="width:100%">
+        <img src="images/download.jpg" style="width:100%">
+      </div>
+      <div class="column">
+        <img src="images/download 2.jpg" style="width:100%">
+        <img src="images/download 4.jpg" style="width:100%">
+        <img src="images/download 1.jpg" style="width:100%">
+        <img src="images/download.jpg" style="width:100%">
+        <img src="images/download 3.jpg" style="width:100%">
+        <img src="images/download 5.jpg" style="width:100%">
+      </div>
+    </div>-->
+    <!--  </section> -->
+  <footer class="foot">Image Classifier Copyright&copy; 2018</footer>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js "></script>
+  <script>
+  // Get the elements with class="column"
+  //  var elements = document.getElementsByClassName("column");
+  // Declare a loop variable
+  //  var i;
+  // Full-width images
+  //function one() {
+  //  for (i = 0; i < elements.length; i++) {
+  //  elements[i].style.msFlex = "100%";  // IE10
+  //  elements[i].style.flex = "100%";
+  //}
+  //}
+  // Two images side by side
+  //  function two() {
+  //      for (i = 0; i < elements.length; i++) {
+  //          elements[i].style.msFlex = "35%";  // IE10
+  //          elements[i].style.flex = "35%";
+  //          elements[i].style.flex = "40%";
+  //      }
+  //  }
+  // Four images side by side
+  //  function four() {
+  //      for (i = 0; i < elements.length; i++) {
+  //        elements[i].style.msFlex = "25%";  // IE10
+  //          elements[i].style.flex = "25%";
+  //      }
+  //  }
+  // Add active class to the current button (highlight it)
+  //  var header = document.getElementById("myHeader");
+  //  var btns = header.getElementsByClassName("btn");
+  //  for (var i = 0; i < btns.length; i++) {
+  //    btns[i].addEventListener("click", function() {
+  //      var current = document.getElementsByClassName("active");
+  //      current[0].className = current[0].className.replace(" active", "");
+  //      this.className += " active";
+  //    });
+  //  }
+  $(document).ready(function(){
+  $('.carousel').carousel({fullwidth:true}).css('height',$(window).height());
+  });
+  $(document).ready(function () {
+  $('.carousel-slider').carousel({
+  indicators:true
+  });
+  $(document).ready(function () {
+  setInterval(function(){
+  $('.carousel').carousel('next')
+  } ,3000)
+  });
+  });
+  $(document).ready(function () {
+  $('.carousel').carousel({ fullWidth: true }).css('height', $(window).height());
+  });
+  $('.carousel.carousel-slider').carousel({
+  fullWidth: true
+  });
+  </script>
+</body>
+</html>

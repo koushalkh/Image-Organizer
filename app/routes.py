@@ -23,6 +23,7 @@ def allowed_file(filename):
 @app.route('/upload',methods=['GET','POST'])
 def MainLogic():
 	mainlist=[]
+	form=SearchForm()
 	if request.method == 'POST':
 		# check if the post request has the file part
 		if 'file' not in request.files:
@@ -43,7 +44,8 @@ def MainLogic():
 	
 		#EXECUTE_ALGO(mainlist)
 	logged_in=True
-	return render_template('image.html',title='Main',jumbo=False,logged_in=True)
+	error=None
+	return render_template('gallery.html',title='Images',form=form,images_list=getList(),error=error)
 
 def getList():
 	fhand = open(os.path.abspath('app/imagelist.txt'), 'r')
@@ -59,7 +61,12 @@ def getList():
 @app.route('/images',methods=['GET','POST'])
 def ImagePage():
 	form=SearchForm()
-	if(form.validate_on_submit()):
+	#if(form.validate_on_submit()):
+	##if request.form['upvote']=='upvote':	
+			
+	#elif request.form['fav']=='fav':
+			
+	if request.method == 'POST':		
 			keyword=request.form['keyword']
 			print("keyword is ",keyword)
 			images_list = []

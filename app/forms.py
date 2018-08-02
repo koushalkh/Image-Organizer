@@ -34,3 +34,4 @@ class UploadForm(FlaskForm):
 class SearchForm(FlaskForm):
 	keyword=StringField('keyword',validators=[DataRequired()])
 	submit=SubmitField('submit')
+	abc = StringField('abc', render_kw={"placeholder": "test"})
