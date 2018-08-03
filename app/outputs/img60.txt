@@ -1,0 +1,2 @@
+/home/chetan/Desktop/Image-Organizer/app/static/Brown_Pelican_0016_1218808356.jpg: Predicted in 28.711343 seconds.
+bird: 100%

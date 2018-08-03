@@ -315,7 +315,7 @@
     }
     .highlight1
     {
-    color: #e8491d;
+    color: #fff;
     }
     footer{
     padding: 20px;
@@ -370,7 +370,7 @@
     <header class="madan">
       <div class="container">
         <div id="branding">
-          <h1 id="madan" style="padding:0;margin:0;position:absolute;top:5%;left:10%;"><span class="highlight1">Image</span> Classifier </h1>
+          <h1 id="madan" style="font-size: 40px;padding:0;margin:0;position:absolute;top:5%;left:10%;"><span class="highlight1">Snapyy</span></h1>
         </div>
         <nav style="background-color:#35424a;">
           <ul>
@@ -383,14 +383,23 @@
     </header>
     <section id="firstup">
       <div class="container">
-        <h1>Image Classifier</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+        <h1 style="font-weight: 350;font-size: 90px;">Snapyy</h1>
+        <p>Snapyy is an Image-Organizer, one-stop place for storing and organizing your images.Your images are detected for objects(dogs, cats, pizzas, baseball bats and many <a href="http://cocodataset.org/#explore">more</a>) in real time and makes it easier for searching images. 
+Just sign up and start uploading images for free! </p>
       </div>
     </section>
+
+ 
+
+
+
     <section>
       <div class="container">
-        <div id="article">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <div id="article" style="font-size: 19px;">
+          <p>You only look once (YOLO) is a state-of-the-art, real-time object detection system. On a Pascal Titan X it processes images at 30 FPS and has a mAP of 57.9% on COCO test-dev.<br>
+          Prior detection systems repurpose classifiers or localizers to perform detection. They apply the model to an image at multiple locations and scales. High scoring regions of the image are considered detections.<br>
+
+We use a totally different approach. We apply a single neural network to the full image. This network divides the image into regions and predicts bounding boxes and probabilities for each region. These bounding boxes are weighted by the predicted probabilities.</p>
         </div>
       </div>
     </section>
@@ -399,7 +408,7 @@
         <a href="#five" class="carousel-item">
           <img src="{{ url_for('static', filename='yolo4.gif')}}"
           alt="">
-        </a>
+        </a>    
         <a href="#one" class="carousel-item">
           <img src="{{ url_for('static', filename='yolo1.png') }}" alt="image">
         </a>
