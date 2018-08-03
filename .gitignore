@@ -4,7 +4,6 @@
 /app/*.pyc
 /app/SQLiteStudio
 /app/*.zip
-/app/*.db
 /app/*.xz
 /app/USERINFO
 /app/*.zip
