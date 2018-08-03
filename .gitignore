@@ -1,5 +1,4 @@
 /myvenv
-*.db
 *.pyc
 /app/*.pyc
 /app/SQLiteStudio
