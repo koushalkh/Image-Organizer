@@ -151,3 +151,23 @@ def PublicSearch(attr):
     except:
         return None
     return [str(r[0]) for r in res]
+
+
+def fetchRandomList():
+    query='select imglink from images'
+    try:
+        res=Execute(query)
+        print([str(r[0]) for r in res])
+    except Exception as e:
+        print(e)
+    return [str(r[0]) for r in res]
+
+def fetchUserList():
+    query='select uid from users where uname="%s"'%(session["username"])
+    try:
+        res=Execute(query)
+        query='select imglink from images where uid="%s"'%(res[0])
+        res=Execute(query)
+    except Exception as e:
+        print(e)
+    return [str(r[0]) for r in res]    

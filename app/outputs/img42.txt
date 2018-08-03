@@ -1,0 +1,4 @@
+/home/chetan/Desktop/Image-Organizer/app/static/images.jpeg: Predicted in 35.565144 seconds.
+person: 100%
+person: 70%
+person: 66%

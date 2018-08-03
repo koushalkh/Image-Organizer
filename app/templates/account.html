@@ -444,7 +444,7 @@ container1 {
           <ul>
             <li class="current"><a href="#">About</a></li>
             {%if session['logged_in']%}
-            <li class="current"><a href="/account" style="padding-left:10px; padding-right:10px;">{{session['username']}}</a></li>
+            <li class="current"><a href="/images" style="padding-left:10px; padding-right:10px;">Images</a></li>
             <li class="current"><a href="/logout">Logout</a></li>
             {%else%}
                 <li class="current"><a href="/login" style="padding-left:10px; padding-right:10px;">Login</a></li>
@@ -455,29 +455,11 @@ container1 {
         </nav>
       </div>
     </header>
-    <section class="container search1">
-      <!-- The form -->
-      <!--<form class="example" action="">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>-->
-      <form class="example" action='/images' method="post" novalidate>
-        {{ form.hidden_tag() }}
-        {{form.keyword(size=32,placeholder="Search...")}}
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </form> 
-    </section>
-    {% if session['logged_in'] %}
-    <section>
-    <form class="button3" action='/upload' method="post" enctype=multipart/form-data novalidate>
-        {{ form.hidden_tag() }}
-        <!--<button type=file name=file multiple class="button3" style="vertical-align:middle"><span>Upload </span></button>-->
-        <input type=file name=file multiple>
-        <input type=submit value=Upload>
-    </form>
-    {%endif%}
-    </section>
 
+    <h1 align="center">Uploaded Images</h1>
+    
+    <section class="container search1">
+    
     <!--<form method=post enctype=multipart/form-data>
         <input type=file name=file multiple>
         <input type=submit value=Upload>

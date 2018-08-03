@@ -374,9 +374,9 @@
         </div>
         <nav style="background-color:#35424a;">
           <ul>
-            <li class="current"><a href="#">login</a></li>
-            <li class="current"><a href="#"  style="padding-left:10px; padding-right:10px;">signup</a></li>
-            <li class="current"><a href="#">images</a></li>
+            <li class="current"><a href="/login">login</a></li>
+            <li class="current"><a href="/signup"  style="padding-left:10px; padding-right:10px;">signup</a></li>
+            <li class="current"><a href="/images">images</a></li>
           </ul>
         </nav>
       </div>
@@ -397,20 +397,19 @@
     <section class="section1 container">
       <div class="carousel carousel-slider" data-indicators="true">
         <a href="#one" class="carousel-item">
-          <img src="https://wallpaper-house.com/data/out/8/wallpaper2you_244911.jpg" alt="image">
+          <img src="{{ url_for('static', filename='yolo1.png') }}" alt="image">
         </a>
         <a href="#two" class="carousel-item">
-          <img src="https://images7.alphacoders.com/467/467811.jpg" alt="image">
+          <img src="{{ url_for('static', filename='yolo2.png') }}" alt="image">
         </a>
         <a href="#three" class="carousel-item">
           <img src="http://www.tematy.info/library/h/home-background-wallpaper/home-background-wallpaper-13.jpg" alt="">
         </a>
         <a href="#four" class="carousel-item">
-          <img src="https://images.unsplash.com/photo-1521063105543-f2c8890df262?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=35786ef9db8d76bcb7e229b14755dd65&auto=format&fit=crop&w=750&q=80"
-          alt="">
+          <img src="{{ url_for('static', filename='yolo3.jpg')}}" alt="">
         </a>
         <a href="#five" class="carousel-item">
-          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-0.3.5&s=bd8ed8308a093982ab2764855a014565&auto=format&fit=crop&w=1500&q=80"
+          <img src="{{ url_for('static', filename='yolo4.gif')}}"
           alt="">
         </a>
       </div>

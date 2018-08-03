@@ -1,0 +1,2 @@
+/home/chetan/Desktop/Image-Organizer/app/static/Common_Yellowthroat_0021_189744224.jpg: Predicted in 44.280682 seconds.
+bird: 100%

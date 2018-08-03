@@ -1,0 +1,1 @@
+/home/chetan/Desktop/Image-Organizer/app/static/download.jpeg: Predicted in 35.771540 seconds.

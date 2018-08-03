@@ -5,7 +5,7 @@ import os,sys
 import subprocess
 from app.dbcode import *
 import time
-
+from random import shuffle
 jumbo=False
 login=True
 from app import ALLOWED_EXTENSIONS,secure_filename
@@ -43,7 +43,6 @@ def MainLogic():
 			print('inserting image ', filename)
 	
 		#EXECUTE_ALGO(mainlist)
-	logged_in=True
 	error=None
 	return render_template('gallery.html',title='Images',form=form,images_list=getList(),error=error)
 
@@ -65,7 +64,7 @@ def ImagePage():
 	##if request.form['upvote']=='upvote':	
 			
 	#elif request.form['fav']=='fav':
-			
+	
 	if request.method == 'POST':		
 			keyword=request.form['keyword']
 			print("keyword is ",keyword)
@@ -77,11 +76,31 @@ def ImagePage():
 				fhand.write("\n")
 			fhand.close()	
 			flash('Search requested for user {}'.format(form.keyword.data))
+			session['searched']=True
 			return redirect('/images')
 	error=1
-	return render_template('gallery.html',title='Images',form=form,images_list=getList(),error=error)
+	if session.get('logged_in')==None and session.get('searched')==None:
+		random_list=fetchRandomList()
+		fhand = open(os.path.abspath('app/imagelist.txt'), 'w')
+		for item in random_list:
+			fhand.write(item)
+			fhand.write("\n")
+		fhand.close()
+		shuffle(random_list)
+		return render_template('gallery.html',title='Images',form=form,images_list=getList(),error=error)
+	else:
+		return render_template('gallery.html',title='Images',form=form,images_list=getList(),error=error)
 
-
+@app.route('/account',methods=['GET','POST'])
+def account():
+	random_list=fetchUserList()
+	fhand = open(os.path.abspath('app/imagelist.txt'), 'w')
+	for item in random_list:
+		fhand.write(item)
+		fhand.write("\n")
+	fhand.close()
+	shuffle(random_list)
+	return render_template('account.html',title='User',images_list=getList())
 
 
 @app.route('/login',methods=['GET','POST'])
@@ -95,6 +114,7 @@ def LoginPage():
 		if(SignIn(username,password)):
 			session['username']=username
 			session['password']=password
+			session['logged_in']=True
 			flash('Login requested for user {},remember_me {}'.format(form.username.data,form.remember_me.data))
 			return redirect('/upload')
 		else:
@@ -110,6 +130,8 @@ def Logout():
 	#con.close()
 	session.pop('username',None)
 	session.pop('password',None)
+	session.pop('logged_in',None)
+	session.pop('searched',None)
 	return redirect('/home')
 
 	

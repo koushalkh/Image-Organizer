@@ -1,0 +1,2 @@
+/home/chetan/Desktop/Image-Organizer/app/static/American_Three_toed_Woodpecker_0025_2599270274.jpg: Predicted in 26.725893 seconds.
+bird: 99%
