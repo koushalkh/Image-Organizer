@@ -81,11 +81,11 @@ def getList(outputloc):
 
 
 def EXECUTE_ALGO(image_names , imgid):
-    #outputloc = os.path.abspath('app/outputs/img%s.txt'%(imgid))
-    outputloc = '/home/chetan/Desktop/Image-Organizer/app/outputs/img%s.txt'%(imgid)
+    outputloc = os.path.abspath('app/outputs/img%s.txt'%(imgid))
+    #outputloc = '/home/chetan/Desktop/Image-Organizer/app/outputs/img%s.txt'%(imgid)
     print(image_names)
-    #os.system(os.path.abspath('app/test.sh  %s  %s'%(image_names, outputloc)))
-    os.system('/home/chetan/Desktop/Image-Organizer/app/test.sh  %s  %s'%(image_names, outputloc))
+    os.system(os.path.abspath('app/test.sh  %s  %s'%(image_names, outputloc)))
+    #os.system('/home/chetan/Desktop/Image-Organizer/app/test.sh  %s  %s'%(image_names, outputloc))
     objList = getList(outputloc)
     addObjects(imgid,objList)
     #print(open(outputloc,'r').read())
